@@ -1,1 +1,1 @@
-# SciAnim -- Renderer for animations written in C++
+# SciAnim - Renderer for animations written in C++
