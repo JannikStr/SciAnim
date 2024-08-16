@@ -1,4 +1,5 @@
 #include "canvas.hxx"
+#include "raylib.h"
 #include <memory>
 
 void Canvas::update(float time)
@@ -11,6 +12,7 @@ void Canvas::update(float time)
 
 void Canvas::draw(float time)
 {
+    ClearBackground(this->bgColor);
     for(auto &object : this->objects)
     {
         object->draw();
@@ -22,7 +24,3 @@ void Canvas::setTime(float time)
     this->currentTime = time;
 }
 
-void Canvas::addObject(std::shared_ptr<ObjectBase> object)
-{
-    this->objects.emplace_back(object);
-}

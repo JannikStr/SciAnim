@@ -1,29 +1,52 @@
 #ifndef SCIANIM_OBJECT
 #define SCIANIM_OBJECT
-#include "raylib.h"
+#include <memory>
 #include <vector>
 
-struct KeyFrame {
+#include <raylib.h>
+
+const int ANIMATION_FLAG_SLOW_START = 1;
+const int ANIMATION_FLAG_SLOW_END = 1 << 1;
+
+class Animation {
+private:
     float duration;
-    float endDuration;
-    Vector2 kfPosition;
+public:
+    explicit Animation(float duration) : duration(duration) {}
+    float getDuration() { return this->duration; }
 };
+
+class MoveAnimation : public Animation {
+public:
+    Vector2 startPosition;
+    Vector2 newPosition;
+};
+
 
 class ObjectBase {
 protected:
     Vector2 position;
-    float currentAnimationDuration;
-    std::vector<KeyFrame> keyFrames;
+    Color   color;
+    Color   borderColor;
+    float   borderThickness;
+
 public:
     explicit ObjectBase(Vector2);
+    virtual inline ~ObjectBase() {};
 
-    void addKeyFramePosition(float duration, Vector2 kfPosition);
-    [[ nodiscard ]] const KeyFrame& getNextKeyFrame(float totalDuration);
 
-public:
+public: // Object Properties
+    inline void setColor(Color color) { this->color = color; }
+    [[ nodiscard ]] inline const Color& getColor() const { return this->color; }
+
+    inline void setBorderColor(Color borderColor) { this->borderColor = borderColor; }
+    [[ nodiscard ]] inline const Color& getBorderColor() const { return this->borderColor; }
+
+    inline void setBorderThickness(float borderThickness) { this->borderThickness = borderThickness; }
+    [[ nodiscard ]] inline float getBorderThickness() const { return this->borderThickness; }
+
+public: // abstract methods
     virtual void draw() = 0;
-    virtual bool update() = 0;
-
-    virtual ~ObjectBase() {}
+    virtual void update() = 0;
 };
 #endif

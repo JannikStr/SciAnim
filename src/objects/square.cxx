@@ -1,7 +1,9 @@
+#include <raylib.h>
+#include <raymath.h>
+#include <cmath>
+
 #include "square.hxx"
 #include "object.hxx"
-#include "raylib.h"
-#include <cmath>
 
 Square::Square(Vector2 position, float width)
     : ObjectBase(position), width(width)
@@ -9,18 +11,11 @@ Square::Square(Vector2 position, float width)
 
 void Square::draw()
 {
-    DrawRectangleV(position, Vector2{width, width}, BLACK);
+    DrawRectangleV(position, Vector2{width, width}, this->getColor());
 }
 
-bool Square::update()
+void Square::update()
 {
-    if (((int) ceilf(currentAnimationDuration) % 4) < 2) {
-        this->position.x += 100 * GetFrameTime();
-    } else {
-        this->position.x -= 100 * GetFrameTime();
-    }
-    currentAnimationDuration += GetFrameTime();
-    return false;
 }
 
 

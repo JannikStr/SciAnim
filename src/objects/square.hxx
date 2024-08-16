@@ -10,7 +10,7 @@ public:
     Square(Vector2 position, float width);
 
     void draw() override;
-    bool update() override;
+    void update() override;
 
     ~Square() override;
 
