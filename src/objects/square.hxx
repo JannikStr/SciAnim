@@ -8,9 +8,11 @@ private:
     float width;
 public:
     Square(Vector2 position, float width);
+    Square(Vector2 position, float width, Color backgroundColor);
+    Square(Vector2 position, float width, Color backgroundColor, Color borderColor, float borderThickness);
 
-    void draw() override;
-    void update() override;
+    void draw(float) override;
+    void update(float) override;
 
     ~Square() override;
 

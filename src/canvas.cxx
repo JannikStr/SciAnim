@@ -2,20 +2,21 @@
 #include "raylib.h"
 #include <memory>
 
-void Canvas::update(float time)
+void Canvas::update()
 {
     for(auto &object : this->objects)
     {
-        object->update();
+        object->update(this->currentTime);
     }
+    this->currentTime += GetFrameTime();
 }
 
-void Canvas::draw(float time)
+void Canvas::draw()
 {
     ClearBackground(this->bgColor);
     for(auto &object : this->objects)
     {
-        object->draw();
+        object->draw(this->currentTime);
     }
 }
 

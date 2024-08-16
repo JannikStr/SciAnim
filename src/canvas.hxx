@@ -17,8 +17,8 @@ public:
     template<typename T, std::enable_if_t<std::is_base_of_v<ObjectBase, T>, bool> Dummy = true>
     std::shared_ptr<T>  addObject(const T& object);
 
-    void update(float currentTime);
-    void draw(float currentTime);
+    void update();
+    void draw();
 
 public:
     void setTime(float time);

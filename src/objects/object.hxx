@@ -22,6 +22,10 @@ public:
     Vector2 newPosition;
 };
 
+class SleepAnimation : public Animation {};
+
+class RelocateAnimation : public Animation {};
+
 
 class ObjectBase {
 protected:
@@ -32,6 +36,8 @@ protected:
 
 public:
     explicit ObjectBase(Vector2);
+    ObjectBase(Vector2, Color);
+    ObjectBase(Vector2, Color, Color, float);
     virtual inline ~ObjectBase() {};
 
 
@@ -42,11 +48,14 @@ public: // Object Properties
     inline void setBorderColor(Color borderColor) { this->borderColor = borderColor; }
     [[ nodiscard ]] inline const Color& getBorderColor() const { return this->borderColor; }
 
-    inline void setBorderThickness(float borderThickness) { this->borderThickness = borderThickness; }
+    inline void setBorderThickness(float borderThickness) { this->borderThickness = borderThickness > 0.0f ? borderThickness : 0.0f; }
     [[ nodiscard ]] inline float getBorderThickness() const { return this->borderThickness; }
 
+public: // Animations
+
+
 public: // abstract methods
-    virtual void draw() = 0;
-    virtual void update() = 0;
+    virtual void draw(float) = 0;
+    virtual void update(float) = 0;
 };
 #endif
