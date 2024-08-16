@@ -5,6 +5,10 @@ project(SciAnim)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(SCIANIM_DEBUG)
+    add_compile_definitions(SCIANIM_DEBUG)
+endif()
+
 # Dependencies
 set(RAYLIB_VERSION 5.0)
 find_package(raylib ${RAYLIB_VERSION} QUIET) # QUIET or REQUIRED
@@ -32,6 +36,7 @@ add_executable(
     src/canvas.cxx
     src/objects/object.cxx
     src/objects/square.cxx
+    src/objects/animations/animation.cxx
 )
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
